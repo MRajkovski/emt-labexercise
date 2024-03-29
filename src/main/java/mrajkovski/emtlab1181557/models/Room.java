@@ -10,7 +10,7 @@ import mrajkovski.emtlab1181557.models.enums.RoomCategory;
 @NoArgsConstructor
 public class Room {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @Enumerated(EnumType.STRING)
