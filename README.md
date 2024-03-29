@@ -1,2 +1,7 @@
 # emt-labexercise
-EMT-LabExercise
+{
+    "name":"testName",
+    "category":"categoryName",
+    "numberOfRooms":"123",
+    "hostId":"123"
+}
