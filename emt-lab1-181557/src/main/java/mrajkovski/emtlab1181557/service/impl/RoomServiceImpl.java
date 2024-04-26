@@ -9,6 +9,7 @@ import mrajkovski.emtlab1181557.repository.RoomRepository;
 import mrajkovski.emtlab1181557.service.RoomService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,10 @@ public class RoomServiceImpl implements RoomService {
         return Optional.of(this.roomRepository.save(room));
     }
 
+    @Override
+    public List<Room> findAll(){
+        return this.roomRepository.findAll();
+    }
     @Override
     public Optional<Room> findById(Long id) {
         return this.roomRepository.findById(id);

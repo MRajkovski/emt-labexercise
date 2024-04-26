@@ -2,9 +2,13 @@ package mrajkovski.emtlab1181557.web;
 
 import mrajkovski.emtlab1181557.models.Room;
 import mrajkovski.emtlab1181557.models.dto.RoomDto;
+import mrajkovski.emtlab1181557.models.enums.RoomCategory;
 import mrajkovski.emtlab1181557.service.RoomService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/rooms")
@@ -15,6 +19,17 @@ public class RoomController {
         this.roomService = roomService;
     }
 
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<List<Room>> getAllRooms(){
+        try{
+            List<Room> rooms = this.roomService.findAll();
+
+            return new ResponseEntity<>(rooms, HttpStatus.OK);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
     @PostMapping("/add")
     public ResponseEntity<Room> save(@RequestBody RoomDto roomDto){
         try{
@@ -34,6 +49,10 @@ public class RoomController {
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
+    }
+    @GetMapping("/categories")
+    public List<RoomCategory> getCategories(){
+        return List.of(RoomCategory.values());
     }
     @PutMapping("/book/{id}")
     public ResponseEntity<Room> book(@PathVariable Long id){

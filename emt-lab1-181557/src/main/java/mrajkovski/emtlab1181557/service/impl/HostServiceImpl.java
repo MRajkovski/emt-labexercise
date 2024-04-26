@@ -22,6 +22,10 @@ public class HostServiceImpl implements HostService {
     }
 
     @Override
+    public Optional<Host> getHostById(Long id){
+        return this.hostRepository.findById(id);
+    }
+    @Override
     public Optional<Host> save(HostDto hostDto) throws Exception {
         Country country = this.countryRepository.findById(hostDto.getCountryId()).orElseThrow(()-> new Exception("Country not found"));
 

@@ -18,6 +18,10 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    public Optional<Country> getCountryById(Long id){
+        return this.countryRepository.findById(id);
+    }
+    @Override
     public Optional<Country> save(CountryDto countryDto) {
         Country country = new Country(countryDto.getName(),countryDto.getContinent());
 

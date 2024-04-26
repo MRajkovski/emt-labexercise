@@ -1,13 +1,14 @@
 package mrajkovski.emtlab1181557.web;
 
 import mrajkovski.emtlab1181557.models.Country;
+import mrajkovski.emtlab1181557.models.Host;
 import mrajkovski.emtlab1181557.models.dto.CountryDto;
 import mrajkovski.emtlab1181557.service.CountryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/countries")
@@ -18,6 +19,15 @@ public class CountryController {
         this.countryService = countryService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Country>> getHostById(@PathVariable Long id){
+        try{
+            Optional<Country> country = this.countryService.getCountryById(id);
+            return new ResponseEntity<>(country, HttpStatus.OK);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
     @PostMapping("/add")
     public ResponseEntity<Country> save(@RequestBody CountryDto countryDto){
         try{
